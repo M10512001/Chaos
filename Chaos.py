@@ -4,25 +4,8 @@ Created on Wed Sep 20 15:31:58 2017
 
 @author: M10512001
 """
-import binascii as bas
 import matplotlib.pyplot as plt
 import numpy as np
-import math
-import time
-
-def ElementAnalysis(data):
-    print(time.asctime(time.localtime(time.time())))
-    ddict = {}
-    for i in range(len(data)):
-        obj=data[i:i+1]
-        if obj in ddict:
-            ddict[obj]+=1
-        else:
-            ddict[obj]=1
-    plt.figure(figsize=(80,8))
-    plt.bar(range(len(ddict.keys())), list(ddict.values()))
-    plt.xticks(range(len(ddict.keys())), list(ddict.keys()), rotation=40)
-    plt.savefig('Analysis.png', dpi=240)
 
 def ChaosFunction(x, y, z, w, a=20, b=0.5, c=6.8, d=8, e=0.5):
     x_dot = -a*x +a*y +y*z +w
