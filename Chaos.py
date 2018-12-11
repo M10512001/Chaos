@@ -6,7 +6,22 @@ Created on Thu Mar 15 13:07:52 2018
 """
 import numpy as np
 
-# line 10-19 are Double(default) type, line 21-30 are Float type.
+def To3DProjector(xs, ys, zs, ws):
+    cdict = {'XYZ':[xs, ys, zs], 'XYW':[xs, ys, ws],
+             'XZW':[xs, zs, ws], 'YZW':[ys, zs, ws]}
+    for i in ('XYZ', 'XYW', 'XZW', 'YZW'):
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot(cdict[i][0], cdict[i][1], cdict[i][2], lw=0.5)
+        dim = list(i)
+        ax.set_xlabel(str(dim[0]) +" Axis")
+        ax.set_ylabel(str(dim[1]) +" Axis")
+        ax.set_zlabel(str(dim[2]) +" Axis")
+        name = "Chaos in " +i
+        ax.set_title("Chaos in " +i)
+#        plt.savefig(name +'.png',dpi=240)
+
+# line 25-34 are Double(default) type, line 21-30 are Float type.
 #x = 0.1
 #y = 0.1
 #z = 0.1
@@ -40,7 +55,7 @@ zl.append(z)
 wl.append(w)
 
 for i in range(1, 2501, 1):
-# line 44-47, 49-52, and 54-77(Altera IP core reuse method) are three way to get the different literations of the same chaos system. 
+# line 59-62, 64-68, and 69-92(Altera IP core reuse method) are three way to get the different literations of the same chaos system. 
 #    xdot = ( a * ( y - x ) + y * z + w ) * t + x
 #    ydot = ( ( b * x + c * y) - ( x * z + e * w ) ) * t + y
 #    zdot = ( x * x - d * z ) * t + z
@@ -84,6 +99,8 @@ for i in range(1, 2501, 1):
     y = ydot
     z = zdot
     w = wdot
+
+#To3DProjector(x,y,z,w)
 
 print('Initial Status:')
 print('X: %10f' % xl[0])
